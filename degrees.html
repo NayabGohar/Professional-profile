@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Degrees - Nayab Gohar">
+    <meta name="keywords" content="Degrees, Nayab Gohar, Professional Profile">
+    <meta name="author" content="Nayab Gohar">
+    <title>Degrees - Nayab Gohar</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1em 0;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        nav a {
+            color: #fff;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 1.1em;
+        }
+        nav a.active {
+            border-bottom: 2px solid #fff;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 2em auto;
+            padding: 2em;
+            background-color: #fff;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 2s ease-in-out;
+        }
+        .container h2 {
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+            color: #333;
+            font-weight: bold;
+        }
+        .degree-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .degree-list li {
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 1.5em;
+        }
+        .degree-list h3 {
+            font-size: 1.5em;
+            color: #333;
+            margin: 0;
+        }
+        .degree-list p {
+            margin: 0.5em 0 0;
+        }
+        footer {
+            text-align: center;
+            padding: 1em;
+            background-color: #333;
+            color: #fff;
+            margin-top: auto;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Nayab Gohar</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="skills.html">Skills</a>
+        <a href="projects.html">Projects</a>
+        <a href="awards.html">Awards</a>
+        <a href="courses.html">Courses</a>
+        <a href="degrees.html" class="active">Degrees</a>
+        <a href="social-feed.html">Social Media</a>
+    </nav>
+</header>
+
+<section class="container">
+    <h2>Degrees</h2>
+    <ul class="degree-list">
+        <li>
+            <h3>Bachelor of Science in Computer Science</h3>
+            <p>This degree provided a comprehensive foundation in computer science principles, including software development, algorithms, and data structures. It involved extensive coursework in programming, system design, and theoretical computer science.</p>
+        </li>
+        <li>
+            <h3>Master of Science in Data Science</h3>
+            <p>The Master’s program focused on advanced data analysis techniques, machine learning, and big data technologies. It emphasized practical applications of data science in various industries, equipping me with skills in data mining, statistical analysis, and predictive modeling.</p>
+        </li>
+        <li>
+            <h3>Diploma in Web Development</h3>
+            <p>This diploma covered essential web development skills, including front-end and back-end development, responsive design, and web technologies. The program included hands-on projects to build and deploy functional websites, enhancing practical experience in web development.</p>
+        </li>
+    </ul>
+</section>
+
+<footer>
+    <p>&copy; 2024 Nayab Gohar. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

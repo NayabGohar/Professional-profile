@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Social Media Feed - Your Name">
+    <meta name="keywords" content="Social Media, Feed, Your Name, Professional Profile">
+    <meta name="author" content="Your Name">
+    <title>Social Media Feed - Your Name</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f1f1f1;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1.5em 0;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 2.5em;
+        }
+        nav a {
+            color: #fff;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+        nav a.active {
+            border-bottom: 2px solid #fff;
+        }
+        nav a:hover {
+            color: #ffd700;
+        }
+
+        /* Carousel Section */
+        .carousel {
+            display: flex;
+            overflow: hidden;
+            position: relative;
+            margin: 2em 0;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .carousel img {
+            width: 100%;
+            border-radius: 10px;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Carousel Controls */
+        .carousel-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-size: 2em;
+            padding: 0.5em;
+            cursor: pointer;
+        }
+        .carousel-control.left {
+            left: 0;
+        }
+        .carousel-control.right {
+            right: 0;
+        }
+
+        /* Social Media Post Layout */
+        .social-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 2em;
+            width: 80%;
+            margin: 2em auto;
+        }
+        .post {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 1em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 1em;
+        }
+        .post-header img {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+        }
+        .post-header .username {
+            font-weight: bold;
+            color: #333;
+        }
+        .post-content {
+            margin: 1em 0;
+        }
+        .post-content img, .post-content video {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 1em;
+        }
+        .post-actions button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #888;
+            font-size: 1.2em;
+        }
+        .post-actions button:hover {
+            color: #000;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5em;
+            background-color: #333;
+            color: #fff;
+            margin-top: auto;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Nayab Gohar</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="skills.html">Skills</a>
+        <a href="projects.html">Projects</a>
+        <a href="awards.html">Awards</a>
+        <a href="courses.html">Courses</a>
+        <a href="degrees.html">Degrees</a>
+        <a href="social-feed.html" class="active">Social Media</a>
+    </nav>
+</header>
+
+<!-- Carousel Section -->
+<div class="carousel">
+    <div class="carousel-control left" onclick="previousSlide()">&#10094;</div>
+    <img src="images/pic1.jpeg" alt="Post 1">
+    <img src="images/pic2.jpg" alt="Post 2">
+    <img src="images/moon.jpg" alt="Post 3">
+    <div class="carousel-control right" onclick="nextSlide()">&#10095;</div>
+</div>
+
+<!-- Social Media Feed -->
+<section class="social-feed">
+    <!-- Post 1: Twitter/Instagram style -->
+    <div class="post">
+        <div class="post-header">
+            <img src="images/moon.jpg" alt="Profile Pic">
+            <div class="username">Nayab Gohar</div>
+        </div>
+        <div class="post-content">
+            <p>Alma Mater.</p>
+            <img src="images/ITU.jpg" alt="Post Image">
+        </div>
+        <div class="post-actions">
+            <button>Like</button>
+            <button>Comment</button>
+            <button>Share</button>
+        </div>
+    </div>
+
+    <!-- Post 2: YouTube style with video -->
+    <div class="post">
+        <div class="post-header">
+            <img src="images/moon.jpg" alt="Profile Pic">
+            <div class="username">Nayab Gohar</div>
+        </div>
+        <div class="post-content">
+            <p>Remembering the childhood again.</p>
+            <video controls>
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="post-actions">
+            <button>Like</button>
+            <button>Comment</button>
+            <button>Share</button>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2024 Nayab Gohar. All rights reserved.</p>
+</footer>
+
+<script>
+    // Carousel functionality
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel img');
+
+    function showSlide(slideIndex) {
+        slides.forEach((slide, index) => {
+            slide.style.display = (index === slideIndex) ? 'block' : 'none';
+        });
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    function previousSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    // Initialize the carousel
+    showSlide(currentSlide);
+</script>
+
+</body>
+</html>
