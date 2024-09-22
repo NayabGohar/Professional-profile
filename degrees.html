@@ -54,7 +54,10 @@
             border-radius: 8px;
             position: relative;
             z-index: 1;
-            animation: fadeInUp 2s ease-in-out;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 2s ease-in-out forwards;
+            animation-delay: 0.5s;
         }
         .container h2 {
             font-size: 2.5em;
@@ -65,11 +68,25 @@
         .degree-list {
             list-style-type: none;
             padding: 0;
+            opacity: 0;
+            transform: translateX(-50px);
+            animation: fadeInLeft 1s ease-in-out forwards;
+            animation-delay: 1s;
         }
         .degree-list li {
             font-size: 1.2em;
             color: #555;
             margin-bottom: 1.5em;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease-in-out forwards;
+            animation-delay: 1.5s;
+        }
+        .degree-list li:nth-child(2) {
+            animation-delay: 2s;
+        }
+        .degree-list li:nth-child(3) {
+            animation-delay: 2.5s;
         }
         .degree-list h3 {
             font-size: 1.5em;
@@ -86,6 +103,21 @@
             color: #fff;
             margin-top: auto;
         }
+        .language-selector {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+        }
+        .language-selector button {
+            margin: 0 5px;
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 0.5em;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -94,6 +126,16 @@
             to {
                 opacity: 1;
                 transform: translateY(0);
+            }
+        }
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
             }
         }
     </style>
@@ -112,29 +154,110 @@
         <a href="degrees.html" class="active">Degrees</a>
         <a href="social-feed.html">Social Media</a>
     </nav>
+    <div class="language-selector">
+        <button onclick="changeLanguage('en')">English</button>
+        <button onclick="changeLanguage('ar')">Arabic</button>
+        <button onclick="changeLanguage('ur')">Urdu</button>
+        <button onclick="changeLanguage('fr')">French</button>
+    </div>
 </header>
 
 <section class="container">
-    <h2>Degrees</h2>
-    <ul class="degree-list">
-        <li>
-            <h3>Bachelor of Science in Computer Science</h3>
-            <p>This degree provided a comprehensive foundation in computer science principles, including software development, algorithms, and data structures. It involved extensive coursework in programming, system design, and theoretical computer science.</p>
-        </li>
-        <li>
-            <h3>Master of Science in Data Science</h3>
-            <p>The Master’s program focused on advanced data analysis techniques, machine learning, and big data technologies. It emphasized practical applications of data science in various industries, equipping me with skills in data mining, statistical analysis, and predictive modeling.</p>
-        </li>
-        <li>
-            <h3>Diploma in Web Development</h3>
-            <p>This diploma covered essential web development skills, including front-end and back-end development, responsive design, and web technologies. The program included hands-on projects to build and deploy functional websites, enhancing practical experience in web development.</p>
-        </li>
-    </ul>
+    <h2 id="degree-title">Degrees</h2>
+    <ul class="degree-list" id="degree-list"></ul>
 </section>
 
 <footer>
     <p>&copy; 2024 Nayab Gohar. All rights reserved.</p>
 </footer>
+
+<script>
+    const degreesData = {
+        en: [
+            {
+                title: 'Bachelor of Science in Computer Science',
+                description: 'This degree provided a comprehensive foundation in computer science principles, including software development, algorithms, and data structures. It involved extensive coursework in programming, system design, and theoretical computer science.'
+            },
+            {
+                title: 'Master of Science in Data Science',
+                description: 'The Master’s program focused on advanced data analysis techniques, machine learning, and big data technologies. It emphasized practical applications of data science in various industries, equipping me with skills in data mining, statistical analysis, and predictive modeling.'
+            },
+            {
+                title: 'Diploma in Web Development',
+                description: 'This diploma covered essential web development skills, including front-end and back-end development, responsive design, and web technologies. The program included hands-on projects to build and deploy functional websites, enhancing practical experience in web development.'
+            }
+        ],
+        ar: [
+            {
+                title: 'بكالوريوس العلوم في علم الحاسوب',
+                description: 'هذا الدرجة قدم أساس شامل في مبادئ علم الحاسوب، بما في ذلك تطوير البرمجيات، والخوارزميات، والهياكل البيانية. شارك في دورات مكثفة في البرمجة، وتصميم النظام، والعلوم النظرية للحاسوب.'
+            },
+            {
+                title: 'ماجستير العلوم في علم البيانات',
+                description: 'برنامج الماجستير ركز على تقنيات تحليل البيانات المتقدمة، والتعلم الآلي، وتقنيات البيانات الكبيرة. ركز على التطبيقات العملية لعلم البيانات في مختلف الصناعات، مما يوفر لي مهارات في تعدين البيانات، والتحليل الإحصائي، والنمذجة التنبؤية.'
+            },
+            {
+                title: 'دبلوم في تطوير الويب',
+                description: 'هذا الدبلوم غطى مهارات تطوير الويب الأساسية، بما في ذلك تطوير الواجهة الأمامية والخلفية، والتصميم الاستجابي، وتقنيات الويب. برنامج الدبلوم شمل مشاريع عملية لبناء ومواقع الويب الوظيفية، مما يعزز الخبرة العملية في تطوير الويب.'
+            }
+        ],
+        ur: [
+            {
+                title: 'کمپیوٹر سائنس میں بیچلر آف سائنس',
+                description: 'یہ ڈگری نے کمپیوٹر سائنس کے اصول میں ایک جامع بنیاد فراہم کی، جس میں سافٹ ویئر ڈویلپمنٹ، الخوارزمیات، اور ڈیٹا سٹرکچرز شامل ہیں. اس میں پروگرامنگ، سسٹم ڈیزائن، اور تھیورٹیکل کمپیوٹر سائنس میں وسیع کورس ورک شامل تھا.'
+            },
+            {
+                title: 'ڈیٹا سائنس میں ماسٹر آف سائنس',
+                description: 'ماسٹر پروگرام نے ڈیٹا سائنس میں جدید ترین تجزیہ تکنیکوں، مشین لیرننگ، اور بڑے ڈیٹا ٹیکنالوجیز پر توجہ دی. اس نے مختلف صنعتوں میں ڈیٹا سائنس کی عملی اطلاقات پر زور دیا، جس سے مجھے ڈیٹا مائننگ، شماریاتی تجزیہ، اور پیش گوئی ماڈلنگ میں مہارت فراہم کی.'
+            },
+            {
+                title: 'ویب ڈویلپمنٹ میں ڈپلوما',
+                description: 'یہ ڈپلوما نے ویب ڈویلپمنٹ کی بنیادی مہارتیں فراہم کیں، جس میں فرنٹ اینڈ اور بیک اینڈ ڈویلپمنٹ، ریسپانسیو ڈیزائن، اور ویب ٹیکنالوجیز شامل ہیں. پروگرام میں عملی پروجیکٹس شامل تھے جو ویب سائٹس کو بنانے اور تعینات کرنے کے لیے تھے، جس سے ویب ڈویلپمنٹ میں عملی تجربہ بڑھا.'
+            }
+        ],
+        fr: [
+            {
+                title: 'Bachelor of Science en Informatique',
+                description: 'Ce diplôme a fourni une fondation complète dans les principes de l’informatique, notamment le développement de logiciels, les algorithmes et les structures de données. Il a impliqué un travail de cours intensif en programmation, conception de système et sciences théoriques de l’informatique.'
+            },
+            {
+                title: 'Master of Science en Science des Données',
+                description: 'Le programme de master a mis l’accent sur les techniques d’analyse de données avancées, l’apprentissage automatique et les technologies de données massives. Il a mis l’accent sur les applications pratiques de la science des données dans diverses industries, m’équipant de compétences en extraction de données, analyse statistique et modélisation prédictive.'
+            },
+            {
+                title: 'Diplôme en Développement Web',
+                description: 'Ce diplôme a couvert les compétences de base en développement web, notamment le développement front-end et back-end, la conception responsive et les technologies web. Le programme a inclus des projets pratiques pour construire et déployer des sites web fonctionnels, améliorant l’expérience pratique en développement web.'
+            }
+        ]
+    };
+
+    function changeLanguage(lang) {
+        const degreeTitle = document.getElementById('degree-title');
+        const degreeList = document.getElementById('degree-list');
+
+        degreeList.innerHTML = '';
+
+
+        degreeTitle.textContent = lang === 'ar' ? 'الدرجات' : lang === 'ur' ? 'ڈگریز' : lang === 'fr' ? 'Diplômes' : 'Degrees';
+
+
+        degreesData[lang].forEach(degree => {
+            const listItem = document.createElement('li');
+            const degreeHeader = document.createElement('h3');
+            const degreeDescription = document.createElement('p');
+
+            degreeHeader.textContent = degree.title;
+            degreeDescription.textContent = degree.description;
+
+            listItem.appendChild(degreeHeader);
+            listItem.appendChild(degreeDescription);
+            degreeList.appendChild(listItem);
+        });
+    }
+
+ 
+    changeLanguage('en');
+</script>
 
 </body>
 </html>
