@@ -54,7 +54,10 @@
             border-radius: 8px;
             position: relative;
             z-index: 1;
-            animation: fadeInUp 2s ease-in-out;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 2s ease-in-out forwards;
+            animation-delay: 0.5s;
         }
         .container h2 {
             font-size: 2.5em;
@@ -65,11 +68,19 @@
         .course-list {
             list-style-type: none;
             padding: 0;
+            opacity: 0;
+            transform: translateX(-50px);
+            animation: fadeInLeft 1s ease-in-out forwards;
+            animation-delay: 1s;
         }
         .course-list li {
             font-size: 1.2em;
             color: #555;
             margin-bottom: 1.5em;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease-in-out forwards;
+            animation-delay: 1.5s;
         }
         .course-list h3 {
             font-size: 1.5em;
@@ -86,6 +97,21 @@
             color: #fff;
             margin-top: auto;
         }
+        .language-selector {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+        }
+        .language-selector button {
+            margin: 0 5px;
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 0.5em;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -94,6 +120,16 @@
             to {
                 opacity: 1;
                 transform: translateY(0);
+            }
+        }
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
             }
         }
     </style>
@@ -112,29 +148,120 @@
         <a href="degrees.html">Degrees</a>
         <a href="social-feed.html">Social Media</a>
     </nav>
+    <div class="language-selector">
+        <button onclick="changeLanguage('en')">English</button>
+        <button onclick="changeLanguage('ar')">Arabic</button>
+        <button onclick="changeLanguage('ur')">Urdu</button>
+        <button onclick="changeLanguage('fr')">French</button>
+    </div>
 </header>
 
 <section class="container">
-    <h2>Courses</h2>
-    <ul class="course-list">
-        <li>
-            <h3>Advanced Python Programming</h3>
-            <p>This course covers advanced topics in Python programming, including data manipulation, multithreading, and advanced libraries. It is designed to enhance your skills and knowledge in Python for complex problem-solving and software development.</p>
-        </li>
-        <li>
-            <h3>Web Development with HTML & CSS</h3>
-            <p>This course focuses on building modern, responsive websites using HTML and CSS. It includes best practices for design, layout, and styling, equipping you with the skills needed to create visually appealing and user-friendly web pages.</p>
-        </li>
-        <li>
-            <h3>Data Analysis with SQL and Excel</h3>
-            <p>Learn how to analyze and visualize data using SQL for database management and Excel for advanced data manipulation and charting. This course is ideal for those looking to gain insights from data and make informed decisions based on data analysis.</p>
-        </li>
-    </ul>
+    <h2 id="course-title">Courses</h2>
+    <ul class="course-list" id="course-list"></ul>
 </section>
 
 <footer>
     <p>&copy; 2024 Nayab Gohar. All rights reserved.</p>
 </footer>
+
+<script>
+    const coursesData = {
+        en: {
+            title: 'Courses',
+            courses: [
+                {
+                    title: 'Advanced Python Programming',
+                    description: 'This course covers advanced topics in Python programming, including data manipulation, multithreading, and advanced libraries. It is designed to enhance your skills and knowledge in Python for complex problem-solving and software development.'
+                },
+                {
+                    title: 'Web Development with HTML & CSS',
+                    description: 'This course focuses on building modern, responsive websites using HTML and CSS. It includes best practices for design, layout, and styling, equipping you with the skills needed to create visually appealing and user-friendly web pages.'
+                },
+                {
+                    title: 'Data Analysis with SQL and Excel',
+                    description: 'Learn how to analyze and visualize data using SQL for database management and Excel for advanced data manipulation and charting. This course is ideal for those looking to gain insights from data and make informed decisions based on data analysis.'
+                }
+            ]
+        },
+        ar: {
+            title: 'الدورات',
+            courses: [
+                {
+                    title: 'برمجة بايثون المتقدمة',
+                    description: 'هذا الكورس يغطي مواضيع متقدمة في برمجة بايثون، بما في ذلك معالجة البيانات، والخيط المتعدد، والمكتبات المتقدمة. وهو مصمم لتعزيز مهاراتك ومعرفتك في بايثون لحل المشكلات المعقدة وتطوير البرمجيات.'
+                },
+                {
+                    title: 'تطوير الويب مع HTML و CSS',
+                    description: 'هذا الكورس يركز على بناء مواقع ويب حديثة ومتجاوبة باستخدام HTML و CSS. ويضم أفضل الممارسات لتصميم، وترتيب، و стиلاج، مما يوفر لك المهارات اللازمة لإنشاء صفحات ويب جذابة وسهلة الاستخدام.'
+                },
+                {
+                    title: 'تحليل البيانات مع SQL و Excel',
+                    description: 'تعلم كيفية تحليل وتصوير البيانات باستخدام SQL لإدارة قاعدة البيانات و Excel للاستخدام المتقدم لتحليل البيانات والرسم البياني. هذا الكورس مثالي لمن يرغبون في الحصول على رؤى من البيانات واتخاذ القرارات المستنيرة بناءً على تحليل البيانات.'
+                }
+            ]
+        },
+        ur: {
+            title: 'کورسز',
+            courses: [
+                {
+                    title: 'ایڈوانسڈ پائتھن پروگرامنگ',
+                    description: 'یہ کورس ایڈوانسڈ پائتھن پروگرامنگ کے موضوعات کو کور کرتا ہے، جس میں ڈیٹا مینپولیشن، ملٹی تھریڈنگ، اور ایڈوانسڈ لائبریری شامل ہیں. یہ کورس آپ کی پائتھن میں مہارت اور علم کو بڑھانے کے لیے ڈیزائن کیا گیا ہے.'
+                },
+                {
+                    title: 'ویب ڈویلپمنٹ کے ساتھ ایچ ٹی ایم ایل اور سی ایس ایس',
+                    description: 'یہ کورس ویب ڈویلپمنٹ کے لیے ایچ ٹی ایم ایل اور سی ایس ایس کا استعمال کرتا ہے. یہ کورس آپ کو ویب صفحات کو بنانے کے لیے ضروری مہارت فراہم کرتا ہے.'
+                },
+                {
+                    title: 'ڈیٹا انالیسز کے ساتھ ایس کیو ایل اور ایکسل',
+                    description: 'یہ کورس آپ کو ڈیٹا انالیسز کے لیے ایس کیو ایل اور ایکسل کا استعمال کرتا ہے. یہ کورس آپ کو ڈیٹا سے رؤیہ حاصل کرنے اور انالیسز کی بنیاد پر فیصلے کرنے کی مہارت فراہم کرتا ہے.'
+                }
+            ]
+        },
+        fr: {
+            title: 'Cours',
+            courses: [
+                {
+                    title: 'Programmation Python avancée',
+                    description: 'Ce cours couvre les sujets avancés de la programmation Python, notamment la manipulation de données, le multithreading et les bibliothèques avancées. Il est conçu pour améliorer vos compétences et vos connaissances en Python pour résoudre les problèmes complexes et développer des logiciels.'
+                },
+                {
+                    title: 'Développement web avec HTML et CSS',
+                    description: 'Ce cours se concentre sur la construction de sites web modernes et responsives utilisant HTML et CSS. Il comprend les meilleures pratiques pour la conception, la mise en page et la stylisation, vous équipant des compétences nécessaires pour créer des pages web attractives et faciles à utiliser.'
+                },
+                {
+                    title: 'Analyse de données avec SQL et Excel',
+                    description: 'Apprenez à analyser et à visualiser les données en utilisant SQL pour la gestion de base de données et Excel pour la manipulation de données avancée et la création de graphiques. Ce cours est idéal pour ceux qui cherchent à obtenir des insights à partir des données et à prendre des décisions éclairées basées sur l\'analyse des données.'
+                }
+            ]
+        }
+    };
+
+    function changeLanguage(lang) {
+        const courseTitle = document.getElementById('course-title');
+        const courseList = document.getElementById('course-list');
+
+        courseList.innerHTML = '';
+
+        courseTitle.textContent = coursesData[lang].title;
+
+        coursesData[lang].courses.forEach(course => {
+            const listItem = document.createElement('li');
+            const courseHeader = document.createElement('h3');
+            const courseDescription = document.createElement('p');
+
+            courseHeader.textContent = course.title;
+            courseDescription.textContent = course.description;
+
+            listItem.appendChild(courseHeader);
+            listItem.appendChild(courseDescription);
+            courseList.appendChild(listItem);
+        });
+    }
+
+
+    changeLanguage('en');
+</script>
 
 </body>
 </html>
