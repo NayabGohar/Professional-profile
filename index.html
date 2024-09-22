@@ -9,104 +9,136 @@
     <title>Home - Nayab Gohar</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        body {
+     body {
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            background-image: url('tech-background.jpg'), url('office-background.jpg');
-            background-size: cover, cover;
-            background-blend-mode: overlay;
-            background-color: rgba(245, 245, 245, 0.8);
         }
         header {
-            background-color: rgba(51, 51, 51, 0.9);
+            background-color: #333;
             color: #fff;
             padding: 1em 0;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            opacity: 0;
+            transform: translateY(-50px);
+            animation: fadeInDown 1s ease-in-out forwards;
         }
         header h1 {
-            margin: 0;
-            font-size: 2.8em;
+            margin-left: 10%;
+            font-size: 2.5em;
             font-weight: bold;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            animation: fadeIn 2s ease-in-out;
+        }
+        nav {
+            text-align: left;
+            margin-left: 10%;
+            margin-top: 1em;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-in-out forwards;
+            animation-delay: 0.5s;
         }
         nav a {
             color: #fff;
-            margin: 0 15px;
+            margin: 0 10px;
             text-decoration: none;
-            font-size: 1.1em;
-            transition: color 0.3s;
+            font-size: 1em;
         }
         nav a.active {
             border-bottom: 2px solid #fff;
             font-weight: bold;
         }
         nav a:hover {
-            color: #00BFFF;
             text-decoration: underline;
         }
+        .language-selector {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+        }
+        .language-selector button {
+            margin: 0 5px;
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 0.5em;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
         .container {
-            max-width: 1200px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 90%;
             margin: 3em auto;
             padding: 2em;
-            background-color: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
             border-radius: 8px;
             position: relative;
             z-index: 1;
-            animation: fadeInUp 2s ease-in-out;
+            flex-direction: row-reverse;
         }
-        .container h2 {
-            font-size: 2.5em;
-            margin-bottom: 0.5em;
-            color: #333;
-            font-weight: bold;
-            text-align: center;
-        }
-        .container p {
-            font-size: 1.2em;
-            color: #555;
-            text-align: center;
+        .content {
+            flex: 1;
+            padding-left: 2em;
+            opacity: 0;
+            transform: translateX(-50px);
+            animation: fadeInLeft 1s ease-in-out forwards;
+            animation-delay: 0.5s;
         }
         .image-collage {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-top: 2em;
+            flex-direction: column;
+            align-items: flex-start;
+            opacity: 0;
+            transform: translateX(50px);
+            animation: fadeInRight 1s ease-in-out forwards;
+            animation-delay: 0.5s;
         }
         .image-collage img {
-            width: 300px;
-            height: 200px;
+            width: 350px;
+            height: auto;
             margin: 10px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s, box-shadow 0.3s;
         }
-        .image-collage img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        .image-collage img:nth-child(odd) {
+            transform: rotate(-5deg);
+        }
+        .image-collage img:nth-child(even) {
+            transform: rotate(5deg);
         }
         footer {
             text-align: center;
             padding: 1em;
-            background-color: rgba(51, 51, 51, 0.9);
+            background-color: #333;
             color: #fff;
             margin-top: auto;
-            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
         }
-        @keyframes fadeInUp {
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .image-collage img {
+                width: 100%;
+                margin: 5px 0;
+                transform: none;
+            }
+            .content h2 {
+                font-size: 2em;
+            }
+            .content p {
+                font-size: 1em;
+            }
+        }
+        @keyframes fadeInDown {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(-50px);
             }
             to {
                 opacity: 1;
@@ -121,40 +153,109 @@
                 opacity: 1;
             }
         }
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Nayab Gohar</h1>
+    <h1 id="header-title">Nayab Gohar</h1>
     <nav>
-        <a href="index.html" class="active">Home</a>
-        <a href="about.html">About</a>
-        <a href="skills.html">Skills</a>
-        <a href="projects.html">Projects</a>
-        <a href="awards.html">Awards</a>
-        <a href="courses.html">Courses</a>
-        <a href="degrees.html">Degrees</a>
-        <a href="social-feed.html">Social Media</a>
+        <a href="index.html" class="active" id="nav-home">Home</a>
+        <a href="about.html" id="nav-about">About</a>
+        <a href="skills.html" id="nav-skills">Skills</a>
+        <a href="projects.html" id="nav-projects">Projects</a>
+        <a href="awards.html" id="nav-awards">Awards</a>
+        <a href="courses.html" id="nav-courses">Courses</a>
+        <a href="degrees.html" id="nav-degrees">Degrees</a>
+        <a href="social-feed.html" id="nav-social">Social Media</a>
     </nav>
+    <div class="language-selector">
+        <button onclick="changeLanguage('en')">English</button>
+        <button onclick="changeLanguage('ar')">Arabic</button>
+        <button onclick="changeLanguage('ur')">Urdu</button>
+        <button onclick="changeLanguage('fr')">French</button>
+    </div>
 </header>
 
 <section class="container">
-    <h2>Welcome to My Professional Profile</h2>
-    <p>Welcome to my professional profile! I’m Nayab Gohar, a passionate Computer Science professional dedicated to leveraging technology to drive innovation. This site provides an overview of my skills, projects, and accomplishments. Navigate through the different sections to explore my expertise and contributions in the field of computer science.</p>
-
-    <!-- Image collage -->
     <div class="image-collage">
         <img src="images/pic1.jpeg" alt="Coding Screenshot">
-        <img src="images/pic4.jpg" alt="Office Setup">
-        <img src="images/pic3.jpeg" alt="Tech Workshop">
-        <img src="images/pic2.jpg" alt="Collaboration">
+        <img src="images/pic2.jpg" alt="Project Presentation">
+        <img src="images/pic3.jpeg" alt="Team Collaboration">
+    </div>
+    <div class="content">
+        <h2 id="content-title">Welcome to My Professional Space</h2>
+        <p id="content-text">Hello, I'm Nayab Gohar, a Software Engineer with a passion for building efficient, scalable, and user-friendly applications...</p>
     </div>
 </section>
 
 <footer>
     <p>&copy; 2024 Nayab Gohar. All rights reserved.</p>
 </footer>
+
+<script>
+    const contentData = {
+        en: {
+            title: "Welcome to My Professional Space",
+            text: "Hello, I'm Nayab Gohar, a Software Engineer with a passion for building efficient, scalable, and user-friendly applications...",
+            nav: ["Home", "About", "Skills", "Projects", "Awards", "Courses", "Degrees", "Social Media"]
+        },
+        ar: {
+            title: "مرحبًا بك في مساحتي المهنية",
+            text: "مرحبًا، أنا ناياب جوهر، مهندس برمجيات شغوف ببناء تطبيقات فعالة وقابلة للتطوير وسهلة الاستخدام...",
+            nav: ["الرئيسية", "حول", "مهارات", "مشاريع", "جوائز", "دورات", "درجات", "وسائل التواصل الاجتماعي"]
+        },
+        ur: {
+            title: "میرے پیشہ ورانہ میدان میں خوش آمدید",
+            text: "ہیلو، میں نایاب گوہر ہوں، سافٹ ویئر انجینئر، مؤثر، اسکیل ایبل، اور صارف دوست ایپلی کیشنز بنانے کا شوقین...",
+            nav: ["ہوم", "میرے بارے میں", "مہارتیں", "پروجیکٹس", "ایوارڈز", "کورسز", "ڈگریاں", "سوشل میڈیا"]
+        },
+        fr: {
+            title: "Bienvenue dans mon espace professionnel",
+            text: "Bonjour, je suis Nayab Gohar, ingénieur logiciel passionné par la création d'applications efficaces, évolutives et conviviales...",
+            nav: ["Accueil", "À propos", "Compétences", "Projets", "Récompenses", "Cours", "Diplômes", "Médias sociaux"]
+        }
+    };
+
+    function changeLanguage(lang) {
+        const headerTitle = document.getElementById('header-title');
+        const contentTitle = document.getElementById('content-title');
+        const contentText = document.getElementById('content-text');
+        const navLinks = document.querySelectorAll('nav a');
+
+
+        headerTitle.textContent = "Nayab Gohar"; 
+
+
+        contentTitle.textContent = contentData[lang].title;
+        contentText.textContent = contentData[lang].text;
+
+     
+        navLinks.forEach((link, index) => {
+            link.textContent = contentData[lang].nav[index];
+        });
+    }
+</script>
 
 </body>
 </html>
