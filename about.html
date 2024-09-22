@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="About - Your Name">
-    <meta name="keywords" content="About, Your Name, Professional Profile">
-    <meta name="author" content="Your Name">
-    <title>About - Your Name</title>
+    <meta name="description" content="About - Nayab Gohar, a Software Engineer with over 5 years of experience in software development. Skilled in Python, JavaScript, and cloud technologies.">
+    <meta name="keywords" content="Nayab Gohar, Software Engineer, Python, JavaScript, Cloud Technologies, Web Development">
+    <meta name="author" content="Nayab Gohar">
+    <title>About - Nayab Gohar</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         body {
@@ -14,29 +14,35 @@
             margin: 0;
             padding: 0;
             background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
         }
         header {
             background-color: #333;
             color: #fff;
             padding: 1em 0;
-            text-align: center;
-            position: relative;
-            z-index: 1;
+            text-align: left;
+            opacity: 0;
+            transform: translateY(-50px);
+            animation: fadeInDown 1s ease-in-out forwards;
         }
         header h1 {
-            margin: 0;
+            margin-left: 10%;
             font-size: 2.5em;
             font-weight: bold;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
+        nav {
+            text-align: left;
+            margin-left: 10%;
+            margin-top: 1em;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-in-out forwards;
+            animation-delay: 0.5s;
+        }
         nav a {
             color: #fff;
-            margin: 0 15px;
+            margin: 0 10px;
             text-decoration: none;
-            font-size: 1.1em;
+            font-size: 1em;
         }
         nav a.active {
             border-bottom: 2px solid #fff;
@@ -45,33 +51,56 @@
         nav a:hover {
             text-decoration: underline;
         }
+        .language-selector {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+        }
+        .language-selector button {
+            margin: 0 5px;
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 0.5em;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
         .container {
             display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            max-width: 1200px;
-            margin: 2em auto;
+            align-items: flex-start;
+            justify-content: space-between;
+            max-width: 90%;
+            margin: 3em auto;
             padding: 2em;
             background-color: #fff;
             box-shadow: 0 0 15px rgba(0,0,0,0.1);
             border-radius: 8px;
             position: relative;
             z-index: 1;
-            animation: fadeInUp 2s ease-in-out;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease-in-out forwards;
+            animation-delay: 1s;
         }
         .container img {
-            max-width: 40%;
+            max-width: 45%;
             height: auto;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            margin-left: 2em;
-            transition: transform 0.3s ease;
-        }
-        .container img:hover {
-            transform: scale(1.05);
+            margin-top: 2em;
+            opacity: 0;
+            transform: translateX(50px);
+            animation: fadeInLeft 1.5s ease forwards;
+            animation-delay: 1.5s;
         }
         .content {
-            max-width: 55%;
+            flex: 1;
+            padding-right: 2em;
+            opacity: 0;
+            transform: translateX(-50px);
+            animation: fadeInRight 1.5s ease forwards;
+            animation-delay: 1.5s;
         }
         .content h2 {
             font-size: 2.5em;
@@ -91,17 +120,86 @@
             color: #fff;
             margin-top: auto;
         }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: flex-start;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            .container img {
+                max-width: 100%;
+                margin-bottom: 2em;
+            }
+            .content h2 {
+                font-size: 2em;
+            }
+            .content p {
+                font-size: 1em;
             }
         }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
     </style>
+    <script>
+        const contentData = {
+            en: {
+                title: "About Me",
+                text: `I’m Nayab Gohar, a Software Engineer with over 5 years of experience in software development. My work spans a range of projects, from developing robust web applications to designing scalable backend systems. I’ve applied my skills in Python, JavaScript, and cloud technologies to deliver impactful solutions. Along the way, I’ve been recognized with several awards for innovation and excellence in my field. I’m passionate about leveraging technology to solve complex problems and am dedicated to continuous growth and learning in my career.`,
+                footer: "© 2024 Nayab Gohar. All rights reserved.",
+                nav: ["Home", "About", "Skills", "Projects", "Awards", "Courses", "Degrees", "Social Media"]
+            },
+            ar: {
+                title: "عني",
+                text: `أنا ناياب جوهر، مهندس برمجيات مع أكثر من 5 سنوات من الخبرة في تطوير البرمجيات. يمتد عملي على مجموعة من المشاريع، من تطوير تطبيقات ويب قوية إلى تصميم أنظمة خلفية قابلة للتطوير. لقد طبقت مهاراتي في بايثون، وجافا سكريبت، وتقنيات السحابة لتقديم حلول مؤثرة. على طول الطريق، تم الاعتراف بي مع العديد من الجوائز للابتكار والتميز في مجالي. أنا شغوف باستخدام التكنولوجيا لحل المشكلات المعقدة وأكرس نفسي للنمو المستمر والتعلم في مسيرتي المهنية.`,
+                footer: "© 2024 ناياب جوهر. جميع الحقوق محفوظة.",
+                nav: ["الصفحة الرئيسية", "حول", "المهارات", "المشاريع", "الجوائز", "الدورات", "الدرجات", "وسائل التواصل الاجتماعي"]
+            },
+            ur: {
+                title: "میرے بارے میں",
+                text: `میں نایاب گوہر ہوں، سافٹ ویئر انجینئر، 5 سال سے زیادہ کا تجربہ رکھتے ہوئے سافٹ ویئر ڈیولپمنٹ میں ماہر ہوں۔ میرا کام مختلف پروجیکٹس پر مشتمل ہے، مضبوط ویب ایپلیکیشنز بنانے سے لے کر اسکیل ایبل بیک اینڈ سسٹمز ڈیزائن کرنے تک۔ میں نے اپنی مہارتیں باقاعدہ مسائل حل کرنے کے لئے ٹیکنالوجی کے فوائد اٹھانے کے لئے وقف کیا ہے۔`,
+                footer: "© 2024 نایاب گوہر. تمام حقوق محفوظ ہیں.",
+                nav: ["ہوم", "میرے بارے میں", "مہارتیں", "پروجیکٹس", "ایوارڈز", "کورسز", "ڈگریاں", "سوشل میڈیا"]
+            },
+            fr: {
+                title: "À Propos de Moi",
+                text: `Je suis Nayab Gohar, un ingénieur logiciel avec plus de 5 ans d'expérience dans le développement de logiciels. Mon travail couvre une gamme de projets, du développement d'applications Web robustes à la conception de systèmes backend évolutifs. J'ai appliqué mes compétences en Python, JavaScript et technologies cloud pour fournir des solutions impactantes. Au fil des ans, j'ai été reconnu avec plusieurs récompenses pour l'innovation et l'excellence dans mon domaine.`,
+                footer: "© 2024 Nayab Gohar. Tous les droits sont réservés.",
+                nav: ["Accueil", "À propos", "Compétences", "Projets", "Récompenses", "Cours", "Diplômes", "Médias sociaux"]
+            }
+        };
+
+        function changeLanguage(lang) {
+            const content = document.querySelector('.content p');
+            const headerTitle = document.querySelector('.content h2');
+            const navLinks = document.querySelectorAll('nav a');
+            const footerText = document.querySelector('footer p');
+
+            const selectedContent = contentData[lang];
+            headerTitle.textContent = selectedContent.title;
+            content.innerHTML = selectedContent.text;
+            footerText.textContent = selectedContent.footer;
+
+            navLinks.forEach((link, index) => {
+                link.textContent = selectedContent.nav[index];
+                link.classList.remove('active');
+                if (index === 1) link.classList.add('active'); 
+            });
+        }
+    </script>
 </head>
 <body>
 
@@ -117,6 +215,12 @@
         <a href="degrees.html">Degrees</a>
         <a href="social-feed.html">Social Media</a>
     </nav>
+    <div class="language-selector">
+        <button onclick="changeLanguage('en')">English</button>
+        <button onclick="changeLanguage('ar')">Arabic</button>
+        <button onclick="changeLanguage('ur')">Urdu</button>
+        <button onclick="changeLanguage('fr')">French</button>
+    </div>
 </header>
 
 <section class="container">
@@ -128,7 +232,7 @@
 </section>
 
 <footer>
-    <p>&copy; 2024 Your Name. All rights reserved.</p>
+    <p>&copy; 2024 Nayab Gohar. All rights reserved.</p>
 </footer>
 
 </body>
