@@ -25,12 +25,21 @@
             text-align: center;
             position: relative;
             z-index: 1;
+            opacity: 0;
+            transform: translateY(-50px);
+            animation: fadeInDown 1s ease-in-out forwards;
         }
         header h1 {
             margin: 0;
             font-size: 2.5em;
             font-weight: bold;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        nav {
+            margin-top: 1em;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-in-out forwards;
+            animation-delay: 0.5s;
         }
         nav a {
             color: #fff;
@@ -45,6 +54,21 @@
         nav a:hover {
             text-decoration: underline;
         }
+        .language-selector {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+        }
+        .language-selector button {
+            margin: 0 5px;
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 0.5em;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
         .container {
             max-width: 1200px;
             margin: 2em auto;
@@ -54,7 +78,10 @@
             border-radius: 8px;
             position: relative;
             z-index: 1;
-            animation: fadeInUp 2s ease-in-out;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease-in-out forwards;
+            animation-delay: 1s;
         }
         .container h2 {
             font-size: 2.5em;
@@ -86,6 +113,7 @@
             color: #fff;
             margin-top: auto;
         }
+        
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -96,7 +124,129 @@
                 transform: translateY(0);
             }
         }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
     </style>
+    <script>
+        const data = {
+            en: {
+                title: "Nayab Gohar",
+                awards: [
+                    {
+                        title: "Best Innovator Award",
+                        description: "This award was granted for developing a cutting-edge software solution that significantly improved operational efficiency in a major company."
+                    },
+                    {
+                        title: "Top Developer of the Year",
+                        description: "Received for exceptional performance in software development over the year."
+                    },
+                    {
+                        title: "Excellence in Data Analysis",
+                        description: "Honored for outstanding achievements in data analysis and visualization."
+                    }
+                ],
+                footer: "© 2024 Nayab Gohar. All rights reserved.",
+                nav: ["Home", "About", "Skills", "Projects", "Awards", "Courses", "Degrees", "Social Media"]
+            },
+            ar: {
+                title: "ناياب جوہر",
+                awards: [
+                    {
+                        title: "أفضل جائزة مبتكر",
+                        description: "تم منح هذه الجائزة لتطوير حل برمجي متقدم أدى إلى تحسين كبير في الكفاءة التشغيلية في شركة كبرى."
+                    },
+                    {
+                        title: "أفضل مطور للعام",
+                        description: "تلقى الجائزة لأدائه الاستثنائي في تطوير البرمجيات على مدار العام."
+                    },
+                    {
+                        title: "تميز في تحليل البيانات",
+                        description: "تم تكريمه لتحقيق إنجازات بارزة في تحليل البيانات والتصور."
+                    }
+                ],
+                footer: "© 2024 ناياب جوهر. جميع الحقوق محفوظة.",
+                nav: ["الصفحة الرئيسية", "حول", "المهارات", "المشاريع", "الجوائز", "الدورات", "الدرجات", "وسائل التواصل الاجتماعي"]
+            },
+            ur: {
+                title: "نایاب گوہر",
+                awards: [
+                    {
+                        title: "بہترین موجد ایوارڈ",
+                        description: "یہ ایوارڈ ایک جدید سافٹ ویئر حل تیار کرنے کے لیے دیا گیا جو ایک بڑی کمپنی میں آپریشنل کارکردگی کو نمایاں طور پر بہتر بناتا ہے۔"
+                    },
+                    {
+                        title: "سال کا بہترین ڈویلپر",
+                        description: "سال بھر میں سافٹ ویئر کی ترقی میں غیر معمولی کارکردگی کے لیے ملا۔"
+                    },
+                    {
+                        title: "ڈیٹا تجزیے میں بہترین کارکردگی",
+                        description: "ڈیٹا کے تجزیے اور بصری شکل میں شاندار کامیابیوں کے لیے اعزاز۔"
+                    }
+                ],
+                footer: "© 2024 نایاب گوہر. تمام حقوق محفوظ ہیں.",
+                nav: ["ہوم", "میرے بارے میں", "مہارتیں", "پروجیکٹس", "ایوارڈز", "کورسز", "ڈگریاں", "سوشل میڈیا"]
+            },
+            fr: {
+                title: "Nayab Gohar",
+                awards: [
+                    {
+                        title: "Meilleure Innovation",
+                        description: "Cette récompense a été accordée pour le développement d'une solution logicielle de pointe qui a considérablement amélioré l'efficacité opérationnelle d'une grande entreprise."
+                    },
+                    {
+                        title: "Développeur de l'année",
+                        description: "Reçu pour une performance exceptionnelle en développement logiciel au cours de l'année."
+                    },
+                    {
+                        title: "Excellence en Analyse de Données",
+                        description: "Honoré pour des réalisations exceptionnelles dans l'analyse et la visualisation des données."
+                    }
+                ],
+                footer: "© 2024 Nayab Gohar. Tous les droits sont réservés.",
+                nav: ["Accueil", "À propos", "Compétences", "Projets", "Récompenses", "Cours", "Diplômes", "Médias sociaux"]
+            }
+        };
+
+        function changeLanguage(lang) {
+            const awardList = document.querySelector('.award-list');
+            const headerTitle = document.querySelector('header h1');
+            const navLinks = document.querySelectorAll('nav a');
+            const footerText = document.querySelector('footer p');
+
+            headerTitle.textContent = data[lang].title;
+            navLinks.forEach((link, index) => {
+                link.textContent = data[lang].nav[index];
+            });
+
+            awardList.innerHTML = data[lang].awards.map(award => `
+                <li>
+                    <h3>${award.title}</h3>
+                    <p>${award.description}</p>
+                </li>
+            `).join('');
+
+            footerText.textContent = data[lang].footer;
+        }
+
+
+        document.addEventListener('DOMContentLoaded', () => changeLanguage('en'));
+    </script>
 </head>
 <body>
 
@@ -112,23 +262,18 @@
         <a href="degrees.html">Degrees</a>
         <a href="social-feed.html">Social Media</a>
     </nav>
+    <div class="language-selector">
+        <button onclick="changeLanguage('en')">English</button>
+        <button onclick="changeLanguage('ar')">Arabic</button>
+        <button onclick="changeLanguage('ur')">Urdu</button>
+        <button onclick="changeLanguage('fr')">French</button>
+    </div>
 </header>
 
 <section class="container">
     <h2>Awards</h2>
     <ul class="award-list">
-        <li>
-            <h3>Best Innovator Award</h3>
-            <p>This award was granted for developing a cutting-edge software solution that significantly improved operational efficiency in a major company. It recognizes the ability to innovate and implement technology solutions effectively.</p>
-        </li>
-        <li>
-            <h3>Top Developer of the Year</h3>
-            <p>Received for exceptional performance in software development over the year. This accolade highlights contributions to high-impact projects and a consistent track record of excellence in coding and project management.</p>
-        </li>
-        <li>
-            <h3>Excellence in Data Analysis</h3>
-            <p>Honored for outstanding achievements in data analysis and visualization. This award acknowledges the development of advanced analytical tools that have provided valuable insights and driven data-driven decision-making.</p>
-        </li>
+
     </ul>
 </section>
 
